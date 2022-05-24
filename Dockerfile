@@ -83,7 +83,7 @@ RUN conda install -c conda-forge -c pytorch -c krinsman -c beakerx go && \
 
 RUN find / -type f -name '*-linux-gun-gcc' | echo
 
-# RUN cp /opt/conda/bin/x86_64-conda_cos6-linux-gnu-cc /opt/conda/bin/x86_64-conda-linux-gnu-cc
+RUN cp /opt/conda/bin/x86_64-conda-linux-gnu-cc /opt/conda/bin/x86_64-conda-linux-gnu-cc
 RUN go get -u github.com/gopherdata/gophernotes
 RUN cd ~/go/src/github.com/gopherdata/gophernotes
 RUN GOPATH=~/go GO111MODULE=on go install .
