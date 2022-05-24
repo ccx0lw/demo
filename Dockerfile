@@ -89,7 +89,4 @@ RUN conda install -c conda-forge matplotlib && \
 # RUN apk add --no-cache nodejs
 RUN conda upgrade -c conda-forge nodejs
 RUN node -v
-
-RUN node -v
-
 CMD ["node -v"]
