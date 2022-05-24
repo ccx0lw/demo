@@ -81,16 +81,19 @@ RUN conda install -c conda-forge -c pytorch -c krinsman -c beakerx go && \
     conda update --all && \
     conda clean --all --yes
 
-RUN conda install gcc_linux-64
+# RUN conda install gcc_linux-64
 
-RUN find / -type f -name '*-linux-gun-gcc' | echo
+# RUN find / -type f -name '*-linux-gun-gcc' | echo
 
 RUN cp /opt/conda/bin/x86_64-conda-linux-gnu-cc /opt/conda/bin/x86_64-conda-linux-gnu-cc
-RUN go get -u github.com/gopherdata/gophernotes
-RUN cd ~/go/src/github.com/gopherdata/gophernotes
-RUN GOPATH=~/go GO111MODULE=on go install .
-RUN cp ~/go/bin/gophernotes /usr/local/bin/
-RUN mkdir -p /usr/local/share/jupyter/kernels/gophernotes
-RUN cp -r ./kernel/* /usr/local/share/jupyter/kernels/gophernotes 
+
+RUN env GO111MODULE=off go get -d -u github.com/gopherdata/gophernotes
+RUN cd "$(go env GOPATH)"/src/github.com/gopherdata/gophernotes
+RUN env GO111MODULE=on go install
+RUN mkdir -p ~/.local/share/jupyter/kernels/gophernotes
+RUN cp kernel/* ~/.local/share/jupyter/kernels/gophernotes
+RUN cd ~/.local/share/jupyter/kernels/gophernotes
+RUN chmod +w ./kernel.json # in case copied kernel.json has no write permission
+RUN sed "s|gophernotes|$(go env GOPATH)/bin/gophernotes|" < kernel.json.in > kernel.json
 
 CMD ["node -v"]
