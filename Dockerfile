@@ -73,7 +73,7 @@ RUN conda install -y python=3 && \
     conda clean --all --yes
 
 # jupyterhub ... 
-RUN conda install -c conda-forge -c pytorch -c krinsman -c beakerx jupyterhub jupyterlab notebook nbgitpuller && \
+RUN conda install -c conda-forge -c pytorch -c go krinsman -c beakerx jupyterhub jupyterlab notebook nbgitpuller && \
     conda update --all && \
     conda clean --all --yes
     
