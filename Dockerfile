@@ -81,6 +81,8 @@ RUN conda install -c conda-forge -c pytorch -c krinsman -c beakerx go && \
     conda update --all && \
     conda clean --all --yes
 
+RUN conda install gcc_linux-64
+
 RUN find / -type f -name '*-linux-gun-gcc' | echo
 
 RUN cp /opt/conda/bin/x86_64-conda-linux-gnu-cc /opt/conda/bin/x86_64-conda-linux-gnu-cc
