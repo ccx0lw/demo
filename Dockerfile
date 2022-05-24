@@ -94,6 +94,8 @@ RUN conda install -c conda-forge matplotlib && \
 RUN conda upgrade -c conda-forge nodejs
 RUN node -v
 
+RUN which x86_64-conda-linux-gnu-cc
+
 # RUN cp /opt/conda/bin/x86_64-conda_cos6-linux-gnu-cc /opt/conda/bin/x86_64-conda-linux-gnu-cc
 RUN go get -u github.com/gopherdata/gophernotes
 RUN cd ~/go/src/github.com/gopherdata/gophernotes
