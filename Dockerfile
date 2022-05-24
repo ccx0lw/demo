@@ -76,6 +76,10 @@ RUN conda install -y python=3 && \
 RUN conda install -c conda-forge -c pytorch -c krinsman -c beakerx jupyterhub jupyterlab notebook nbgitpuller && \
     conda update --all && \
     conda clean --all --yes
+    
+RUN conda install -c conda-forge -c pytorch -c krinsman matplotlib && \
+    conda update --all && \
+    conda clean --all --yes
 
 # An error occurred. ValueError: Please install nodejs ＞=12.0.0 before continuing.
 # 参考：https://blog.csdn.net/m0_59249795/article/details/124660726
