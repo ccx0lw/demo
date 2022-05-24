@@ -80,19 +80,6 @@ RUN conda install -c conda-forge -c pytorch -c krinsman -c beakerx jupyterhub ju
 RUN conda install -c conda-forge -c pytorch -c krinsman -c beakerx go && \
     conda update --all && \
     conda clean --all --yes
-   
-RUN conda install -c conda-forge matplotlib && \
-    conda update --all && \
-    conda clean --all --yes
-
-# An error occurred. ValueError: Please install nodejs ＞=12.0.0 before continuing.
-# 参考：https://blog.csdn.net/m0_59249795/article/details/124660726
-#      https://computingforgeeks.com/how-to-install-nodejs-on-ubuntu-debian-linux-mint/
-# nodejs
-# RUN conda install -c conda-forge nodejs
-# RUN apk add --no-cache nodejs
-RUN conda upgrade -c conda-forge nodejs
-RUN node -v
 
 RUN find / -type f -name '*-linux-gun-gcc' | xargs grep -i 'x86_64-conda*-linux-gnu-cc'
 
