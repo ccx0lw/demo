@@ -51,6 +51,32 @@ RUN apk add --no-cache bash shadow sudo curl linux-pam ca-certificates libintl g
             
 RUN apk add --virtual .build-deps build-base automake autoconf libtool linux-pam-dev openssl-dev wget unzip
 
+# 安装 conda
+ENV CONDA_DIR /opt/conda
+ENV PATH $CONDA_DIR/bin:$PATH
+ENV CONTAINER_UID 1000
+ENV INSTALLER Miniconda3-latest-Linux-x86_64.sh
+RUN cd /tmp && \
+    mkdir -p $CONDA_DIR && \
+    wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
+    echo $(wget --quiet -O - https://repo.continuum.io/miniconda/ \
+    | grep -A3 $INSTALLER \
+    | tail -n1 \
+    | cut -d\> -f2 \
+    | cut -d\< -f1 ) $INSTALLER  && \
+    /bin/bash $INSTALLER -f -b -p $CONDA_DIR && \
+    rm $INSTALLER
+
+# python3
+RUN conda install -y python=3 && \
+    conda update conda && \
+    conda clean --all --yes
+
+# jupyterhub ... 
+RUN conda install -c conda-forge -c pytorch -c krinsman -c beakerx jupyterhub jupyterlab notebook nbgitpuller && \
+    conda update --all && \
+    conda clean --all --yes
+
 # An error occurred. ValueError: Please install nodejs ＞=12.0.0 before continuing.
 # 参考：https://blog.csdn.net/m0_59249795/article/details/124660726
 #      https://computingforgeeks.com/how-to-install-nodejs-on-ubuntu-debian-linux-mint/
