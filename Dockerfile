@@ -89,4 +89,13 @@ RUN conda install -c conda-forge matplotlib && \
 # RUN apk add --no-cache nodejs
 RUN conda upgrade -c conda-forge nodejs
 RUN node -v
+
+RUN cp /opt/conda/bin/x86_64-conda_cos6-linux-gnu-cc /opt/conda/bin/x86_64-conda-linux-gnu-cc
+RUN go get -u github.com/gopherdata/gophernotes
+RUN cd ~/go/src/github.com/gopherdata/gophernotes
+RUN GOPATH=~/go GO111MODULE=on go install .
+RUN cp ~/go/bin/gophernotes /usr/local/bin/
+RUN mkdir -p /usr/local/share/jupyter/kernels/gophernotes
+RUN cp -r ./kernel/* /usr/local/share/jupyter/kernels/gophernotes 
+
 CMD ["node -v"]
