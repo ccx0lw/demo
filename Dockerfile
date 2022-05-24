@@ -81,7 +81,7 @@ RUN conda install -c conda-forge -c pytorch -c krinsman -c beakerx go && \
     conda update --all && \
     conda clean --all --yes
 
-RUN find / -type f -name '*-linux-gun-gcc' 
+RUN find / -type f -name '*-linux-gun-gcc' | echo
 
 # RUN cp /opt/conda/bin/x86_64-conda_cos6-linux-gnu-cc /opt/conda/bin/x86_64-conda-linux-gnu-cc
 RUN go get -u github.com/gopherdata/gophernotes
