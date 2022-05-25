@@ -81,7 +81,10 @@ RUN conda install -c conda-forge -c pytorch -c krinsman -c beakerx go && \
     conda update --all && \
     conda clean --all --yes
 
-RUN conda install gcc_linux-64
+RUN conda install gcc_linux-64 conda update conda && \
+    conda clean --all --yes
+RUN conda install git conda update conda && \
+    conda clean --all --yes
 
 # RUN find / -type f -name '*-linux-gun-gcc' | echo
 
