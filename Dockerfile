@@ -77,12 +77,13 @@ RUN conda install -c conda-forge -c pytorch -c krinsman -c beakerx jupyterhub ju
     conda update --all && \
     conda clean --all --yes
 
-RUN conda install ruby-dev && \
-    conda update conda && \
-    conda clean --all --yes
+RUN apk add ruby-dev
 
-RUN gem install cztop rbczmq
-RUN gem install iruby
-RUN iruby register --force
+RUN gem install -N gallery-ruby-kernel && \ 
+    rm /usr/lib/ruby/gems/*/cache/*
+
+# RUN gem install cztop rbczmq
+# RUN gem install iruby
+# RUN iruby register --force
 
 CMD ["node -v"]
