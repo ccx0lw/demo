@@ -77,6 +77,10 @@ RUN conda install -c conda-forge -c pytorch -c krinsman -c beakerx jupyterhub ju
     conda update --all && \
     conda clean --all --yes
 
+RUN conda install gem && \
+    conda update conda && \
+    conda clean --all --yes
+
 RUN gem install cztop rbczmq
 RUN gem install iruby
 RUN iruby register --force
