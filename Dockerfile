@@ -77,32 +77,8 @@ RUN conda install -c conda-forge -c pytorch -c krinsman -c beakerx jupyterhub ju
     conda update --all && \
     conda clean --all --yes
 
-RUN conda install -c conda-forge -c pytorch -c krinsman -c beakerx go && \
-    conda update --all && \
-    conda clean --all --yes
-
-RUN conda install gcc_linux-64 && \ 
-    conda update conda && \
-    conda clean --all --yes
-
-# RUN find / -type f -name '*-linux-gun-gcc' | echo
-
-RUN cp /opt/conda/bin/x86_64-conda-linux-gnu-cc /opt/conda/bin/x86_64-conda-linux-gnu-cc
-
-# RUN env GO111MODULE=off go get -d -u github.com/gopherdata/gophernotes
-# RUN cd "$(go env GOPATH)"/src/github.com/gopherdata/gophernotes
-# RUN env GO111MODULE=on go install
-# RUN mkdir -p ~/.local/share/jupyter/kernels/gophernotes
-# RUN cp kernel/* ~/.local/share/jupyter/kernels/gophernotes
-# RUN cd ~/.local/share/jupyter/kernels/gophernotes
-# RUN chmod +w ./kernel.json # in case copied kernel.json has no write permission
-# RUN sed "s|gophernotes|$(go env GOPATH)/bin/gophernotes|" < kernel.json.in > kernel.json
-
-RUN env GO111MODULE=on go get github.com/gopherdata/gophernotes
-RUN mkdir -p ~/.local/share/jupyter/kernels/gophernotes
-RUN cd ~/.local/share/jupyter/kernels/gophernotes
-RUN cp "$(go env GOPATH)"/pkg/mod/github.com/gopherdata/gophernotes@v0.7.4/kernel/*  "."
-RUN chmod +w ./kernel.json # in case copied kernel.json has no write permission
-RUN sed "s|gophernotes|$(go env GOPATH)/bin/gophernotes|" < kernel.json.in > kernel.json
+RUN gem install cztop rbczmq
+RUN gem install iruby
+RUN iruby register --force
 
 CMD ["node -v"]
