@@ -77,7 +77,7 @@ RUN conda install -c conda-forge -c pytorch -c krinsman -c beakerx jupyterhub ju
     conda update --all && \
     conda clean --all --yes
 
-RUN conda install ruby && \
+RUN conda install ruby-dev && \
     conda update conda && \
     conda clean --all --yes
 
