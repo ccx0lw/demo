@@ -83,7 +83,7 @@ RUN apk add ruby-dev
 #     rm /usr/lib/ruby/gems/*/cache/*
 
 RUN gem update --system
-RUN gem install cztop rbczmq
+RUN gem install cztop rbczmq ffi-rzmq 
 RUN gem install iruby
 RUN iruby register --force
 
